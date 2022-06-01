@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import {yupResolver} from "@hookform/resolvers/yup"
 import { useState } from "react";
+import { useAuth } from "../../contexts/auth";
 
 const signInSchema = yup.object().shape({
     email: yup.string().required("Email Obrigatório").email("Email Inválido"),
@@ -19,27 +20,41 @@ interface SignInData {
 
 export const Login = () => {
     const [loading, setLoading] = useState(false)
+
+    const {LogIn} = useAuth()
+
     const {handleSubmit, register, formState: {errors}} = useForm<SignInData>({
         resolver: yupResolver(signInSchema)
     })
-    const handleSignIn = (data: SignInData) =>console.log(data)
+
+    const handleSignIn = (data: SignInData) =>{
+        setLoading(true);
+        LogIn(data)
+         .then(_=>setLoading(false))
+         .catch(err=>setLoading(false));
+    }
     return(
     <Flex 
       padding="10px 15px"
       alignItems="center"
       justifyContent="center"
       color="white"
-      height="100vh" 
-      bgGradient="linear(to-r, purple.800 65%, white 35%)" 
+      height={["auto", "auto", "100vh", "100vh"]}
+      bgGradient={[
+          "linear(to-b, purple.800 45%, white 5%)",
+          "linear(to-b, purple.800 45%, white 5%)" , 
+          "linear(to-r, purple.800 65%, white 35%)" ,
+          "linear(to-r, purple.800 65%, white 35%)" 
+        ]}
     >
         <Flex
-          w="70%"
+          w={["100%", "78%", "90%", "70%"]}
           justifyContent="center"
-          flexDirection="row"
+          flexDirection={["column", "column", "row", "row"]}
           alignItems="center"
         >
             <Grid w="100%" paddingRight="100px">
-                <Image src={LogoSecondary}/>
+                <Image src={LogoSecondary} boxSize={["120px", "120px", "150px", "150px"]} />
                 <Heading as="h1">O jeito fácil, grátis</Heading>
                 <Text>flexível e atrativo de gerenciar <b>seus projetos em uma única plataforma </b></Text>
             </Grid>
