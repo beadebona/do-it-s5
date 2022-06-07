@@ -15,9 +15,11 @@ export const theme = extendTheme({
            50: "#f6f6f7",
            100:"#eee",
            200: "#d4d4d4",
+           250: "#C4C4C4",
            300: "#9e9ea7",
            400: "#666665",
            900: "#111",
+           title: "#0E0E0F",
         },
         red: {
             600: "#df1545",
