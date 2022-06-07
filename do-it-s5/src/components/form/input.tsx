@@ -78,7 +78,9 @@ const InputBase : ForwardRefRenderFunction<HTMLInputElement, InputProps> = ({nam
                     variant="outline" 
                     _hover={{bg:"grey.100"}} 
                     _placeholder={{color: "grey.300"}} 
-                    _focus={{borderColor:inputVariation[variation]}}
+                    _focus={{borderColor:inputVariation[variation],
+                    bg: "grey.100"
+                    }}
                     size="lg" 
                     h="60px"
                     ref={ref}
