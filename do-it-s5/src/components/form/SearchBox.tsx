@@ -1,11 +1,11 @@
 import { Button, Center, Flex, useDisclosure } from "@chakra-ui/react"
 import { FaSearch } from "react-icons/fa"
-import { ModalTask } from "../modal/ModalTask"
+// import { ModalTask } from "../modal/ModalTask"
 import { Input } from "./input"
 
 
 export const SearchBox = () =>{
-    const {isOpen, onOpen, onClose } = useDisclosure()
+    // const {isOpen, onOpen, onClose } = useDisclosure()
     return(
 
         <Flex alignItems="center" w="100vw"
@@ -26,9 +26,9 @@ export const SearchBox = () =>{
             color="white" 
             borderRadius="0.5rem" 
             _hover={{bg: "purple.900"}}
-            onClick={onOpen}
+            // onClick={onOpen}
             >Adicionar nova tarefa</Button>
-            <ModalTask isOpen={isOpen} onClose={onClose} />
+            {/* <ModalTask isOpen={isOpen} onClose={onClose} /> */}
     </Flex>
     )
 }

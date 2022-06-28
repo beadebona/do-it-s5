@@ -3,6 +3,35 @@ import { Card } from "../../components/Card";
 import { SearchBox } from "../../components/form/SearchBox";
 import { Header } from "../../components/Header";
 
+
+interface dataInfo{
+    title: string,
+    description: string,
+    date: string
+}
+
+interface cardProps{
+    data: dataInfo
+}
+
+const dataList = ()=>[
+    {
+        title:"",
+        description: "",
+        date: ""
+    },
+    {
+        title:"",
+        description: "",
+        date: ""
+    },
+    {
+        title:"",
+        description: "",
+        date: ""
+    }
+]
+
     export const Dashboard = () =>{
       
     return (
@@ -10,7 +39,7 @@ import { Header } from "../../components/Header";
         <Header/>
         <SearchBox/>
         <Grid w="100%" templateColumns="repeat(auto-fill, minmax(420px, 1fr))" gap={10} paddingX="8" mt="8">
-            {[1,2,3,4,5,6,].map(_=><Card/>)}
+            {dataList.map((data:cardProps) =><Card data={data}/>)}
         </Grid>
         
         </>

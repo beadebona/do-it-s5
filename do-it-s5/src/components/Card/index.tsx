@@ -1,7 +1,17 @@
 import { Box, Center, Flex, Heading, HStack, Progress, Text } from "@chakra-ui/react"
 import { FaCheck, FaTrash } from "react-icons/fa"
 
-export const Card = () =>{
+interface dataInfo{
+    title: string,
+    description: string,
+    date: string
+}
+
+interface cardProps{
+    data: dataInfo
+}
+
+export const Card = ({data}: cardProps) =>{
     return (
         <Box cursor="pointer" 
         transition=" border 0.2s, ease 0s, transform 0.2s"
@@ -17,7 +27,7 @@ export const Card = () =>{
             borderColor:"grey.100"
         }}>
             <Flex justify="space-between">
-                <Heading w="75%" color="grey.title" as="h2" fontSize="20px">Studying database-driven concepts</Heading>
+                <Heading w="75%" color="grey.title" as="h2" fontSize="20px">{data.title}</Heading>
                 <HStack>
                     <Center as="button" w="30px" h="30px" color="grey.300" border="2px" borderColor="grey.300" borderRadius="5px" >
                         <FaTrash/>
@@ -28,9 +38,9 @@ export const Card = () =>{
                 </HStack>
             </Flex>
             <Box mt="2.5">
-                <Text color="grey.400" fontSize="14px" >Start study through Kenzie app, for 1 hour and a half</Text>
+                <Text color="grey.400" fontSize="14px" >{data.description}</Text>
                 <Progress colorScheme="purple" value={10} mt="2.5" />
-                <Text color="grey.200" mt="3" fontSize="12px">07 March 2021</Text>
+                <Text color="grey.200" mt="3" fontSize="12px">{data.date}</Text>
             </Box>
             
         </Box>

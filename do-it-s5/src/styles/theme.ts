@@ -45,11 +45,12 @@ export const theme = extendTheme({
             "7xl": "4.5rem",
             "8xl": "6rem",
         }, 
-        styles: {
-            global: {
-                bg: "white",
-                color: "gray.900",
-            }
+       
+    } ,
+    styles: {
+        global: {
+            bg: "white",
+            color: "gray.900",
         }
     }
 })

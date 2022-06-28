@@ -3,14 +3,25 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { FaFileAlt } from "react-icons/fa";
 import { Input } from "../form/input";
+import * as yup from "yup";
 
 interface ModalTaskProps {
     isOpen: boolean;
     onClose: ()=>void;
 }
 
+const taskSchema = yup.object().shape({
+    email: yup.string().required("Email Obrigatório").email("Email Inválido"),
+    password: yup.string().required("Senha Obrigatória")
+})
+
+interface ModalTaskData {
+    title: string,
+    description: string
+}
+
 export const ModalTask = ({isOpen, onClose}:ModalTaskProps) =>{
-    const {register, handleSubmit, errors } = useForm(resolver: yupResolver(taskSchema))
+    // const {register, handleSubmit, formState: {errors} } = useForm<ModalTaskData>(resolver: yupResolver(taskSchema))
     return (
         <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
@@ -24,9 +35,9 @@ export const ModalTask = ({isOpen, onClose}:ModalTaskProps) =>{
             <ModalCloseButton bg="red.600" color="white" _hover={{ bg: "red.600"}} />
             <ModalBody as="form">
                 <Input label="Título"/>
-                {!errors.title && <Text mb="8" color="grey.300" fontSize="12px" >Ex: Estudar React - Chakra UI</Text>}
+                {/* {!errors.title && <Text mb="8" color="grey.300" fontSize="12px" >Ex: Estudar React - Chakra UI</Text>} */}
                 <Input label="Descrição"/>
-                {!errors.description && <Text mb="8" color="grey.300" fontSize="12px" >Máximo 100 caracteres</Text>}
+                {/* {!errors.description && <Text mb="8" color="grey.300" fontSize="12px" >Máximo 100 caracteres</Text>} */}
 
                 <Button type="submit" mt="8" w="100%" bg="purple.500" _hover={{ bg: "purple.600"}} color="white" mr={3} onClick={onClose}>
                 Adicionar Tarefa
