@@ -24,6 +24,7 @@ export const SignUpForm = ({handleSubmit, loading,  register, errors }:SignUpFor
           as="form" 
           mt="4"
           w={["100%", "90%", "80%", "80%"]} 
+          maxW="510px"
           padding="20px" 
           borderColor="gray.100" 
           bg="white" 

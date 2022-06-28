@@ -1,3 +1,4 @@
+import { AxiosResponse } from "axios";
 import { useCallback } from "react";
 import { useState } from "react";
 import { createContext, ReactNode, useContext } from "react";
@@ -21,12 +22,15 @@ interface AuthState {
 interface LoginCredentials {
     email: string;
     password: string;
+    name?: string;
 }
 
 interface AuthContextData{
     user: User;
     accessToken: string;
     LogIn:(credentials: LoginCredentials) => Promise<void>;
+    SignUp:(credentials: LoginCredentials) => Promise<void>;
+    LogOut: () =>void;
 }
 
 const AuthContext = createContext<AuthContextData>({}as AuthContextData);
@@ -51,13 +55,29 @@ export const AuthProvider =({children}: AuthProviderProps) =>{
         return {} as AuthState;
     });
 
+    const redirect = (data:AuthState)=>{
+        const { accessToken, user } = data;
+        localStorage.setItem("@Do-it.2: accessToken", accessToken)
+        localStorage.setItem("@Do-it.2: user", JSON.stringify(user))
+        setData({accessToken, user})
+    }
+
+    const SignUp = useCallback(async({email, password, name}: LoginCredentials)=>{
+        const response = await API.post("register", {email, password, name})
+        redirect(response.data)
+    }, [])
+
     const LogIn = useCallback(async({email, password}: LoginCredentials)=>{
         const response = await API.post("login", {email, password})
-        const { accessToken, user } = response.data;
-        localStorage.setItem("@Do-it.2: accessToken", accessToken)
-        localStorage.setItem("@Do-it.2: user", user)
-        setData({accessToken, user})
-
+        redirect(response.data)
     }, [])
-    return <AuthContext.Provider value={{user: data.user, accessToken: data.accessToken , LogIn}}>{children}</AuthContext.Provider>
+
+    const LogOut = useCallback(()=>{
+        localStorage.removeItem("@Do-it.2: accessToken")
+        localStorage.removeItem("@Do-it.2: user")
+
+        setData({} as AuthState)
+    }, [])
+
+    return <AuthContext.Provider value={{user: data.user, accessToken: data.accessToken , LogIn, LogOut, SignUp}}>{children}</AuthContext.Provider>
 }

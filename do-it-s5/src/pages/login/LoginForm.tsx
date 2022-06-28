@@ -26,6 +26,7 @@ export const LoginForm = ({handleSubmit, errors, register,loading}: LoginFormPro
           as="form" 
           mt="4"
           w="100%" 
+          maxW="510px"
           padding="30px 15px" 
           borderColor="gray.100" 
           bg="white" 

@@ -3,13 +3,17 @@ import { FaForward } from "react-icons/fa";
 import LogoSecondary from "../../assets/logo-secondary.svg";
 import { SimpleIcon } from "../../assets/simple";
 import { theme } from "../../styles/theme";
+import { GoBackButton } from "./GoBackButton";
 
 
 export const SignUpInfo = () =>{
     return(
-        <Grid w="100%"
-          ml={["30px", "0", "100px", "100px"]}
-          h={["100%", "100%", "90vh", "90vh"]}
+        <Grid 
+          w="100%"
+          ml={["30px", "0", "20px", "100px"]}
+          h={["100%", "100%", "100%", "90vh"]}
+          position="relative"
+          maxW="500px"
         >
         <Image src={LogoSecondary} boxSize={["120px", "120px", "150px", "150px"]} />
         <VStack spacing="14" >
